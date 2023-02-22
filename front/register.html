@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>login</title>
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.3/jquery.min.js" integrity="sha512-STof4xm1wgkfm7heWqFJVn58Hm3EtS31XFaagaa8VMReCXAkQnJZ+jEy8PCC/iT18dFy95WcExNHFTqLyp72eQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+</head>
+<body class="d-flex justify-content-center align-items-center" style="min-height:100vh">
+    <form action="http://127.0.0.1:3000/register" id="idregister" method="post" name="form1">
+        <div class="form-group">
+        <label for="exampleInputEmail1">User Name</label>
+        <input type="name" name="username" class="form-control" id="username" aria-describedby="nameHelp" placeholder="Enter name" value="">
+        </div>   
+        <div class="form-group">
+            <label for="exampleInputEmail1">First Name</label>
+            <input type="name" name="firstname" class="form-control" id="firstname" aria-describedby="nameHelp" placeholder="Enter first name" value="">
+            </div>   
+            <div class="form-group">
+                <label for="exampleInputEmail1">Last Name</label>
+                <input type="name" name="lastname" class="form-control" id="lastname" aria-describedby="nameHelp" placeholder="Enter last name" value="">
+                </div>   
+        
+        <div class="form-group">
+        <label for="exampleInputEmail1">Password</label>
+        <input type="password" name="password" class="form-control" id="password" aria-describedby="emailHelp" placeholder="*********" value="">
+        </div>
+        <input type="submit" class="btn btn-primary" value="Add">
+        <a href="./login.html" class="btn btn-success ml-2">Login</a>
+        </form> 
+
+        <script>
+            $("#idregister").submit(function(e) {
+        
+        e.preventDefault(); // avoid to execute the actual submit of the form.
+        
+        var form = $(this);
+        var actionUrl = form.attr('action');
+        
+        $.ajax({
+            type: "POST",
+            url: actionUrl,
+            data: form.serialize(), // serializes the form's elements.
+            success: function(data)
+            {
+                
+                if(data.code==200){
+            sessionStorage.setItem("username", data.name);  
+
+window.location.replace("./chatroom.html");
+        }
+        else{
+            $('#alert').show();
+        }
+   
+            }
+        });
+        
+        });
+        </script>
+</body>
+</html>

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+  <title>Chat Application</title>
+  <script defer src="http://localhost:3001/socket.io/socket.io.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.3/jquery.min.js" integrity="sha512-STof4xm1wgkfm7heWqFJVn58Hm3EtS31XFaagaa8VMReCXAkQnJZ+jEy8PCC/iT18dFy95WcExNHFTqLyp72eQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+  <script defer src="chat.js"></script>
+
+</head>
+<body>
+  <nav class="navbar navbar-light bg-light">
+    <span class="navbar-brand mb-0 h1" id="navbrand"></span>
+    <div class="form-inline">
+       
+        <button class="btn btn-outline-success my-2 my-sm-0" type="submit" onclick="logout()">logout</button>
+    </div>
+  </nav>
+  <div class="container mt-5">
+    <div class="row">
+      <div class="col-sm-8 mx-auto">
+        <div class="card">
+          <div class="card-header d-flex justify-content-between">
+<span>   Chat Room</span>
+         <button class="btn-outline-danger btn"> leave</button>
+          </div>
+
+          <div class="card-body">
+            <p id="typing"></p>
+            <ul class="list-group" id="messsage-container" >
+            </ul>
+          </div>
+          <div class="card-footer">
+            <form id="chat-form">
+              <div class="input-group">
+                <input type="text" class="form-control" id="m" placeholder="Enter your message">
+                <div class="input-group-append">
+                  <button class="btn btn-primary" type="submit">Send</button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  
+<script>
+  $('#navbrand').html(sessionStorage.getItem("username"))
+function logout(){
+sessionStorage. removeItem("username");  
+
+window.location.replace("./login.html");
+}
+ function gochat(){
+var id=$('#roomList').val();
+// Simulate a mouse click:
+window.location.href = "./chat.html?cid="+id;
+
+  }
+</script>
+</body>
+</html>
