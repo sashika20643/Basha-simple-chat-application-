@@ -57,18 +57,20 @@ main()
 // Listen for the "join-chat-group" event from the client
 
   io.on("connection", function (socket) {
-    socket.on("connectUser", function (userId,chatGroupId) {
+    socket.on("connectUser", function (userId,chatGroupId,randomColor) {
+        console.log(randomColor);
         var chatGroupid=chatGroupId;
+
       socket.userId = userId;
       socket.join(chatGroupId);
-      socket.broadcast.to(chatGroupId).emit("chat-message", userId+"join to the group");
+      socket.broadcast.to(chatGroupId).emit("chat-message", userId+"join to the group",randomColor);
       console.log(chatGroupId);
       console.log(userId);
 
 
       socket.on('chat-message', data => {
         console.log(data);
-        socket.broadcast.to(chatGroupid).emit("chat-message", userId+":"+data);
+        socket.broadcast.to(chatGroupid).emit("chat-message", userId+":"+data,randomColor);
       })
     });
 
